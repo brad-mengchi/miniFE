@@ -1,0 +1,149 @@
+==15230== NVPROF is profiling process 15230, command: ./miniFE.x nx=200 ny=200 nz=200 verify_solution=1
+ OMP_NUM_THREADS=40
+      creating/filling mesh...0.246544s, total time: 0.246546
+generating matrix structure...3.56241s, total time: 3.80896
+         assembling FE data...0.380166s, total time: 4.18912
+      imposing Dirichlet BC...0.0464659s, total time: 4.23559
+      imposing Dirichlet BC...0.042861s, total time: 4.27845
+making matrix indices local...9.05991e-06s, total time: 4.27846
+Starting CG solver ... 
+Initial Residual = 201.002
+Iteration = 20   Residual = 0.0773231
+Iteration = 40   Residual = 0.199385
+Iteration = 60   Residual = 0.0217462
+Iteration = 80   Residual = 0.0436759
+Iteration = 100   Residual = 0.0106146
+Iteration = 120   Residual = 0.0231365
+Iteration = 140   Residual = 0.00609197
+Iteration = 160   Residual = 0.00462386
+Iteration = 180   Residual = 0.00354265
+Iteration = 200   Residual = 0.00261951
+Final Resid Norm: 0.00261951
+verifying solution at ~ (0.5, 0.5, 0.5) ...
+solution matches analytic solution to within 0.06 or better.
+==15230== Profiling application: ./miniFE.x nx=200 ny=200 nz=200 verify_solution=1
+==15230== Profiling result:
+Time(%)      Time     Calls       Avg       Min       Max  Name
+ 65.53%  1.60963s       201  8.0081ms  7.9621ms  8.0421ms  void miniFE::matvec_ell_kernel<miniFE::PODELLMatrix<double, int, int>, miniFE::PODVector<double, int, int>>(double, int, double)
+ 13.18%  323.87ms       602  537.98us  358.89us  543.51us  void miniFE::waxpby_kernel<miniFE::PODVector<double, int, int>>(doubleScalarType, miniFE::waxpby_kernel<miniFE::PODVector<double, int, int>>, double, miniFE::waxpby_kernel<miniFE::PODVector<double, int, int>>, miniFE::waxpby_kernel<miniFE::PODVector<double, int, int>>)
+  8.71%  213.83ms         1  213.83ms  213.83ms  213.83ms  void miniFE::element_loop_kernel<miniFE::PODELLMatrix<double, int, int>, miniFE::PODVector<double, int, int>, miniFE::PODMesh<int>>(int, doubleGlobalOrdinalType, double const *, int, int, intScalarType const *, intScalarType const )
+  4.45%  109.31ms       400  273.27us  184.90us  361.36us  void miniFE::dot_kernel<miniFE::PODVector<double, int, int>>(double, miniFE::dot_kernel<miniFE::PODVector<double, int, int>>, miniFE::TypeTraits<miniFE::dot_kernel<miniFE::PODVector<double, int, int>::ScalarType>>::magnitude_type*)
+  4.44%  109.12ms       403  270.77us     704ns  67.972ms  [CUDA memcpy DtoH]
+  2.42%  59.406ms         2  29.703ms  27.727ms  31.679ms  void miniFE::impose_dirichlet_second_kernel<miniFE::PODELLMatrix<double, int, int>, miniFE::PODVector<double, int, int>>(doubleScalarType, miniFE::impose_dirichlet_second_kernel<miniFE::PODELLMatrix<double, int, int>, miniFE::PODVector<double, int, int>>, int, miniFE::impose_dirichlet_second_kernel<miniFE::PODELLMatrix<double, int, int>::GlobalOrdinalType, miniFE::PODVector<double, int, int>>*, int)
+  0.60%  14.849ms         1  14.849ms  14.849ms  14.849ms  void miniFE::generate_matrix_structure_kernel<miniFE::PODMesh<int>, miniFE::PODELLMatrix<double, int, int>>(int, miniFE::PODMesh<int>, int, int, int)
+  0.23%  5.6254ms         9  625.04us  1.1840us  4.7759ms  void thrust::system::cuda::detail::bulk_::detail::launch_by_value<unsigned int=0, thrust::system::cuda::detail::bulk_::detail::cuda_task<thrust::system::cuda::detail::bulk_::parallel_group<thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<unsigned long=1>, unsigned long=0>, unsigned long=0>, thrust::system::cuda::detail::bulk_::detail::closure<thrust::system::cuda::detail::for_each_n_detail::for_each_kernel, thrust::tuple<thrust::system::cuda::detail::bulk_::detail::cursor<unsigned int=0>, thrust::device_ptr<double>, thrust::detail::wrapped_function<thrust::detail::device_generate_functor<thrust::detail::fill_functor<double>>, void>, unsigned int, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type>>>>(unsigned long=1)
+  0.17%  4.0552ms         8  506.90us     704ns  3.9675ms  [CUDA memcpy HtoD]
+  0.11%  2.6715ms         6  445.26us  1.1520us  2.5809ms  void thrust::system::cuda::detail::bulk_::detail::launch_by_value<unsigned int=0, thrust::system::cuda::detail::bulk_::detail::cuda_task<thrust::system::cuda::detail::bulk_::parallel_group<thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<unsigned long=1>, unsigned long=0>, unsigned long=0>, thrust::system::cuda::detail::bulk_::detail::closure<thrust::system::cuda::detail::for_each_n_detail::for_each_kernel, thrust::tuple<thrust::system::cuda::detail::bulk_::detail::cursor<unsigned int=0>, thrust::device_ptr<int>, thrust::detail::wrapped_function<thrust::detail::device_generate_functor<thrust::detail::fill_functor<int>>, void>, unsigned int, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type>>>>(unsigned long=1)
+  0.10%  2.5432ms         2  1.2716ms  1.1827ms  1.3606ms  void miniFE::impose_dirichlet_first_kernel<miniFE::PODELLMatrix<double, int, int>, miniFE::PODVector<double, int, int>>(doubleScalarType, miniFE::impose_dirichlet_first_kernel<miniFE::PODELLMatrix<double, int, int>, miniFE::PODVector<double, int, int>>, int, miniFE::impose_dirichlet_first_kernel<miniFE::PODELLMatrix<double, int, int>::GlobalOrdinalType, miniFE::PODVector<double, int, int>>*, int, int, int)
+  0.04%  913.48us       400  2.2830us  2.2080us  2.6560us  void miniFE::dot_final_reduce_kernel<double>(double*)
+  0.02%  416.56us       400  1.0410us     800ns  2.2720us  void miniFE::cudaMemset_kernel<double>(double*, miniFE::cudaMemset_kernel<double>, int)
+  0.01%  166.76us         1  166.76us  166.76us  166.76us  void thrust::system::cuda::detail::bulk_::detail::launch_by_value<unsigned int=0, thrust::system::cuda::detail::bulk_::detail::cuda_task<thrust::system::cuda::detail::bulk_::parallel_group<thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<unsigned long=1>, unsigned long=0>, unsigned long=0>, thrust::system::cuda::detail::bulk_::detail::closure<thrust::system::cuda::detail::for_each_n_detail::for_each_kernel, thrust::tuple<thrust::system::cuda::detail::bulk_::detail::cursor<unsigned int=0>, thrust::detail::normal_iterator<thrust::device_ptr<double>>, thrust::detail::wrapped_function<thrust::detail::device_generate_functor<thrust::detail::fill_functor<int>>, void>, unsigned int, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type>>>>(unsigned long=1)
+
+==15230== API calls:
+Time(%)      Time     Calls       Avg       Min       Max  Name
+ 65.78%  2.01530s       400  5.0383ms  1.1649ms  8.8831ms  cudaEventSynchronize
+ 15.23%  466.53ms         2  233.26ms  20.744us  466.51ms  cudaStreamCreate
+  9.85%  301.76ms        15  20.117ms  62.091us  213.96ms  cudaFree
+  2.75%  84.219ms         2  42.109ms  378.62us  83.840ms  cudaHostRegister
+  2.23%  68.175ms        10  6.8175ms  4.8890us  67.969ms  cudaDeviceSynchronize
+  1.28%  39.230ms         1  39.230ms  39.230ms  39.230ms  cudaHostUnregister
+  0.99%  30.199ms       414  72.945us  1.0470us  22.016ms  cudaMemcpyAsync
+  0.67%  20.625ms         1  20.625ms  20.625ms  20.625ms  cudaMemcpy
+  0.54%  16.537ms      2025  8.1660us  6.3560us  77.176us  cudaLaunch
+  0.27%  8.1499ms        16  509.37us  13.270us  2.3090ms  cudaMalloc
+  0.19%  5.7148ms      6465     883ns     698ns  14.667us  cudaSetupArgument
+  0.06%  1.8845ms      2025     930ns     768ns  4.7490us  cudaConfigureCall
+  0.05%  1.6127ms       182  8.8600us     907ns  386.02us  cuDeviceGetAttribute
+  0.04%  1.2947ms      1412     916ns     768ns  14.807us  cudaGetLastError
+  0.03%  774.78us       417  1.8570us  1.3960us  40.998us  cudaEventRecord
+  0.02%  574.95us         1  574.95us  574.95us  574.95us  cudaGetDeviceProperties
+  0.01%  445.46us         2  222.73us  92.682us  352.78us  cuDeviceTotalMem
+  0.01%  253.81us        64  3.9650us  2.5150us  13.060us  cudaFuncGetAttributes
+  0.00%  130.96us         2  65.478us  63.557us  67.399us  cuDeviceGetName
+  0.00%  78.577us        49  1.6030us     838ns  5.5170us  cudaGetDevice
+  0.00%  55.874us        18  3.1040us  1.4670us  5.7970us  cudaEventCreateWithFlags
+  0.00%  46.095us        18  2.5600us  1.4670us  6.2860us  cudaEventDestroy
+  0.00%  28.216us         2  14.108us  3.2820us  24.934us  cudaStreamDestroy
+  0.00%  15.855us        11  1.4410us  1.0480us  2.5840us  cudaDeviceGetAttribute
+  0.00%  12.571us         1  12.571us  12.571us  12.571us  cudaSetDevice
+  0.00%  12.432us         1  12.432us  12.432us  12.432us  cudaMemcpyToSymbolAsync
+  0.00%  6.3570us         6  1.0590us     908ns  1.1880us  cuDeviceGet
+  0.00%  3.9110us         3  1.3030us     838ns  1.9560us  cuDeviceGetCount
+  0.00%  2.0950us         1  2.0950us  2.0950us  2.0950us  cudaThreadSetCacheConfig
+  0.00%  1.8160us         1  1.8160us  1.8160us  1.8160us  cudaDeviceSetSharedMemConfig
+
+==15230== NVTX result:
+==15230==   Thread "<unnamed>" (id = 1841752000)
+==15230==     Domain "<unnamed>"
+==15230==       Range "Allocation of Temporary Vectors" (1 times, total time: 680.96ms)
+Time(%)      Time     Calls       Avg       Min       Max  Name
+100.00%  506.42us         3  168.81us  166.92us  169.83us  void thrust::system::cuda::detail::bulk_::detail::launch_by_value<unsigned int=0, thrust::system::cuda::detail::bulk_::detail::cuda_task<thrust::system::cuda::detail::bulk_::parallel_group<thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<unsigned long=1>, unsigned long=0>, unsigned long=0>, thrust::system::cuda::detail::bulk_::detail::closure<thrust::system::cuda::detail::for_each_n_detail::for_each_kernel, thrust::tuple<thrust::system::cuda::detail::bulk_::detail::cursor<unsigned int=0>, thrust::device_ptr<double>, thrust::detail::wrapped_function<thrust::detail::device_generate_functor<thrust::detail::fill_functor<double>>, void>, unsigned int, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type>>>>(unsigned long=1)
+==15230==     API calls:
+Time(%)      Time     Calls       Avg       Min       Max  Name
+100.00%  170.70us         3  56.899us  52.662us  62.509us  cudaLaunch
+==15230==       Range "allocate device memory" (1 times, total time: 4.0104ms)
+Time(%)      Time     Calls       Avg       Min       Max  Name
+ 64.18%  4.7759ms         1  4.7759ms  4.7759ms  4.7759ms  void thrust::system::cuda::detail::bulk_::detail::launch_by_value<unsigned int=0, thrust::system::cuda::detail::bulk_::detail::cuda_task<thrust::system::cuda::detail::bulk_::parallel_group<thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<unsigned long=1>, unsigned long=0>, unsigned long=0>, thrust::system::cuda::detail::bulk_::detail::closure<thrust::system::cuda::detail::for_each_n_detail::for_each_kernel, thrust::tuple<thrust::system::cuda::detail::bulk_::detail::cursor<unsigned int=0>, thrust::device_ptr<double>, thrust::detail::wrapped_function<thrust::detail::device_generate_functor<thrust::detail::fill_functor<double>>, void>, unsigned int, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type>>>>(unsigned long=1)
+ 35.82%  2.6649ms         2  1.3325ms  84.002us  2.5809ms  void thrust::system::cuda::detail::bulk_::detail::launch_by_value<unsigned int=0, thrust::system::cuda::detail::bulk_::detail::cuda_task<thrust::system::cuda::detail::bulk_::parallel_group<thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<unsigned long=1>, unsigned long=0>, unsigned long=0>, thrust::system::cuda::detail::bulk_::detail::closure<thrust::system::cuda::detail::for_each_n_detail::for_each_kernel, thrust::tuple<thrust::system::cuda::detail::bulk_::detail::cursor<unsigned int=0>, thrust::device_ptr<int>, thrust::detail::wrapped_function<thrust::detail::device_generate_functor<thrust::detail::fill_functor<int>>, void>, unsigned int, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type>>>>(unsigned long=1)
+==15230==     API calls:
+Time(%)      Time     Calls       Avg       Min       Max  Name
+100.00%  65.234us         3  21.744us  19.067us  23.258us  cudaLaunch
+==15230==       Range "allocate host memory" (1 times, total time: 3.46831s)
+No kernels were profiled in this range.
+==15230==     API calls:
+No API activities were profiled in this range.
+==15230==       Range "assemble FE data" (1 times, total time: 380.35ms)
+Time(%)      Time     Calls       Avg       Min       Max  Name
+ 98.10%  213.83ms         1  213.83ms  213.83ms  213.83ms  void miniFE::element_loop_kernel<miniFE::PODELLMatrix<double, int, int>, miniFE::PODVector<double, int, int>, miniFE::PODMesh<int>>(int, doubleGlobalOrdinalType, double const *, int, int, intScalarType const *, intScalarType const )
+  1.82%  3.9699ms         4  992.47us     736ns  3.9675ms  [CUDA memcpy HtoD]
+  0.08%  166.76us         1  166.76us  166.76us  166.76us  void thrust::system::cuda::detail::bulk_::detail::launch_by_value<unsigned int=0, thrust::system::cuda::detail::bulk_::detail::cuda_task<thrust::system::cuda::detail::bulk_::parallel_group<thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<unsigned long=1>, unsigned long=0>, unsigned long=0>, thrust::system::cuda::detail::bulk_::detail::closure<thrust::system::cuda::detail::for_each_n_detail::for_each_kernel, thrust::tuple<thrust::system::cuda::detail::bulk_::detail::cursor<unsigned int=0>, thrust::detail::normal_iterator<thrust::device_ptr<double>>, thrust::detail::wrapped_function<thrust::detail::device_generate_functor<thrust::detail::fill_functor<int>>, void>, unsigned int, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type>>>>(unsigned long=1)
+  0.00%  2.5600us         2  1.2800us  1.2160us  1.3440us  void thrust::system::cuda::detail::bulk_::detail::launch_by_value<unsigned int=0, thrust::system::cuda::detail::bulk_::detail::cuda_task<thrust::system::cuda::detail::bulk_::parallel_group<thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<unsigned long=1>, unsigned long=0>, unsigned long=0>, thrust::system::cuda::detail::bulk_::detail::closure<thrust::system::cuda::detail::for_each_n_detail::for_each_kernel, thrust::tuple<thrust::system::cuda::detail::bulk_::detail::cursor<unsigned int=0>, thrust::device_ptr<double>, thrust::detail::wrapped_function<thrust::detail::device_generate_functor<thrust::detail::fill_functor<double>>, void>, unsigned int, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type>>>>(unsigned long=1)
+==15230==     API calls:
+Time(%)      Time     Calls       Avg       Min       Max  Name
+ 96.93%  4.1670ms         3  1.3890ms  9.0790us  4.1350ms  cudaMemcpyAsync
+  2.78%  119.57us         4  29.892us  12.502us  60.414us  cudaLaunch
+  0.29%  12.432us         1  12.432us  12.432us  12.432us  cudaMemcpyToSymbolAsync
+==15230==       Range "cgsolve" (1 times, total time: 2.74894s)
+Time(%)      Time     Calls       Avg       Min       Max  Name
+ 78.71%  1.60963s       201  8.0081ms  7.9621ms  8.0421ms  void miniFE::matvec_ell_kernel<miniFE::PODELLMatrix<double, int, int>, miniFE::PODVector<double, int, int>>(double, int, double)
+ 15.84%  323.87ms       602  537.98us  358.89us  543.51us  void miniFE::waxpby_kernel<miniFE::PODVector<double, int, int>>(doubleScalarType, miniFE::waxpby_kernel<miniFE::PODVector<double, int, int>>, double, miniFE::waxpby_kernel<miniFE::PODVector<double, int, int>>, miniFE::waxpby_kernel<miniFE::PODVector<double, int, int>>)
+  5.35%  109.31ms       400  273.27us  184.90us  361.36us  void miniFE::dot_kernel<miniFE::PODVector<double, int, int>>(double, miniFE::dot_kernel<miniFE::PODVector<double, int, int>>, miniFE::TypeTraits<miniFE::dot_kernel<miniFE::PODVector<double, int, int>::ScalarType>>::magnitude_type*)
+  0.04%  913.48us       400  2.2830us  2.2080us  2.6560us  void miniFE::dot_final_reduce_kernel<double>(double*)
+  0.02%  507.60us         4  126.90us  1.1840us  169.83us  void thrust::system::cuda::detail::bulk_::detail::launch_by_value<unsigned int=0, thrust::system::cuda::detail::bulk_::detail::cuda_task<thrust::system::cuda::detail::bulk_::parallel_group<thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<unsigned long=1>, unsigned long=0>, unsigned long=0>, thrust::system::cuda::detail::bulk_::detail::closure<thrust::system::cuda::detail::for_each_n_detail::for_each_kernel, thrust::tuple<thrust::system::cuda::detail::bulk_::detail::cursor<unsigned int=0>, thrust::device_ptr<double>, thrust::detail::wrapped_function<thrust::detail::device_generate_functor<thrust::detail::fill_functor<double>>, void>, unsigned int, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type>>>>(unsigned long=1)
+  0.02%  416.56us       400  1.0410us     800ns  2.2720us  void miniFE::cudaMemset_kernel<double>(double*, miniFE::cudaMemset_kernel<double>, int)
+  0.01%  299.72us       400     749ns     704ns  1.4080us  [CUDA memcpy DtoH]
+==15230==     API calls:
+Time(%)      Time     Calls       Avg       Min       Max  Name
+ 80.69%  16.005ms      2007  7.9740us  6.3560us  62.509us  cudaLaunch
+ 19.31%  3.8301ms       400  9.5750us  8.3810us  28.007us  cudaMemcpyAsync
+==15230==       Range "generate matrix structure" (1 times, total time: 3.56248s)
+Time(%)      Time     Calls       Avg       Min       Max  Name
+ 79.93%  88.778ms         2  44.389ms  20.805ms  67.972ms  [CUDA memcpy DtoH]
+ 13.37%  14.849ms         1  14.849ms  14.849ms  14.849ms  void miniFE::generate_matrix_structure_kernel<miniFE::PODMesh<int>, miniFE::PODELLMatrix<double, int, int>>(int, miniFE::PODMesh<int>, int, int, int)
+  4.30%  4.7759ms         1  4.7759ms  4.7759ms  4.7759ms  void thrust::system::cuda::detail::bulk_::detail::launch_by_value<unsigned int=0, thrust::system::cuda::detail::bulk_::detail::cuda_task<thrust::system::cuda::detail::bulk_::parallel_group<thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<unsigned long=1>, unsigned long=0>, unsigned long=0>, thrust::system::cuda::detail::bulk_::detail::closure<thrust::system::cuda::detail::for_each_n_detail::for_each_kernel, thrust::tuple<thrust::system::cuda::detail::bulk_::detail::cursor<unsigned int=0>, thrust::device_ptr<double>, thrust::detail::wrapped_function<thrust::detail::device_generate_functor<thrust::detail::fill_functor<double>>, void>, unsigned int, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type>>>>(unsigned long=1)
+  2.40%  2.6649ms         2  1.3325ms  84.002us  2.5809ms  void thrust::system::cuda::detail::bulk_::detail::launch_by_value<unsigned int=0, thrust::system::cuda::detail::bulk_::detail::cuda_task<thrust::system::cuda::detail::bulk_::parallel_group<thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<unsigned long=1>, unsigned long=0>, unsigned long=0>, thrust::system::cuda::detail::bulk_::detail::closure<thrust::system::cuda::detail::for_each_n_detail::for_each_kernel, thrust::tuple<thrust::system::cuda::detail::bulk_::detail::cursor<unsigned int=0>, thrust::device_ptr<int>, thrust::detail::wrapped_function<thrust::detail::device_generate_functor<thrust::detail::fill_functor<int>>, void>, unsigned int, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type>>>>(unsigned long=1)
+==15230==     API calls:
+Time(%)      Time     Calls       Avg       Min       Max  Name
+ 99.64%  22.059ms         2  11.030ms  43.024us  22.016ms  cudaMemcpyAsync
+  0.36%  79.901us         4  19.975us  14.667us  23.258us  cudaLaunch
+==15230==       Range "impose boundary conditions" (1 times, total time: 89.391ms)
+Time(%)      Time     Calls       Avg       Min       Max  Name
+ 95.76%  59.406ms         2  29.703ms  27.727ms  31.679ms  void miniFE::impose_dirichlet_second_kernel<miniFE::PODELLMatrix<double, int, int>, miniFE::PODVector<double, int, int>>(doubleScalarType, miniFE::impose_dirichlet_second_kernel<miniFE::PODELLMatrix<double, int, int>, miniFE::PODVector<double, int, int>>, int, miniFE::impose_dirichlet_second_kernel<miniFE::PODELLMatrix<double, int, int>::GlobalOrdinalType, miniFE::PODVector<double, int, int>>*, int)
+  4.10%  2.5432ms         2  1.2716ms  1.1827ms  1.3606ms  void miniFE::impose_dirichlet_first_kernel<miniFE::PODELLMatrix<double, int, int>, miniFE::PODVector<double, int, int>>(doubleScalarType, miniFE::impose_dirichlet_first_kernel<miniFE::PODELLMatrix<double, int, int>, miniFE::PODVector<double, int, int>>, int, miniFE::impose_dirichlet_first_kernel<miniFE::PODELLMatrix<double, int, int>::GlobalOrdinalType, miniFE::PODVector<double, int, int>>*, int, int, int)
+  0.14%  83.810us         2  41.905us  14.784us  69.026us  [CUDA memcpy HtoD]
+  0.01%  3.7770us         2  1.8880us  1.4090us  2.3680us  void thrust::system::cuda::detail::bulk_::detail::launch_by_value<unsigned int=0, thrust::system::cuda::detail::bulk_::detail::cuda_task<thrust::system::cuda::detail::bulk_::parallel_group<thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<unsigned long=1>, unsigned long=0>, unsigned long=0>, thrust::system::cuda::detail::bulk_::detail::closure<thrust::system::cuda::detail::for_each_n_detail::for_each_kernel, thrust::tuple<thrust::system::cuda::detail::bulk_::detail::cursor<unsigned int=0>, thrust::device_ptr<int>, thrust::detail::wrapped_function<thrust::detail::device_generate_functor<thrust::detail::fill_functor<int>>, void>, unsigned int, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type>>>>(unsigned long=1)
+==15230==     API calls:
+Time(%)      Time     Calls       Avg       Min       Max  Name
+ 50.81%  102.74us         6  17.123us  8.4510us  31.080us  cudaLaunch
+ 49.19%  99.456us         2  49.728us  27.378us  72.078us  cudaMemcpyAsync
+==15230==       Range "make local matrix" (1 times, total time: 38.344us)
+No kernels were profiled in this range.
+==15230==     API calls:
+No API activities were profiled in this range.
+==15230==       Range "reserve space in A" (1 times, total time: 4.0123ms)
+Time(%)      Time     Calls       Avg       Min       Max  Name
+ 64.18%  4.7759ms         1  4.7759ms  4.7759ms  4.7759ms  void thrust::system::cuda::detail::bulk_::detail::launch_by_value<unsigned int=0, thrust::system::cuda::detail::bulk_::detail::cuda_task<thrust::system::cuda::detail::bulk_::parallel_group<thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<unsigned long=1>, unsigned long=0>, unsigned long=0>, thrust::system::cuda::detail::bulk_::detail::closure<thrust::system::cuda::detail::for_each_n_detail::for_each_kernel, thrust::tuple<thrust::system::cuda::detail::bulk_::detail::cursor<unsigned int=0>, thrust::device_ptr<double>, thrust::detail::wrapped_function<thrust::detail::device_generate_functor<thrust::detail::fill_functor<double>>, void>, unsigned int, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type>>>>(unsigned long=1)
+ 35.82%  2.6649ms         2  1.3325ms  84.002us  2.5809ms  void thrust::system::cuda::detail::bulk_::detail::launch_by_value<unsigned int=0, thrust::system::cuda::detail::bulk_::detail::cuda_task<thrust::system::cuda::detail::bulk_::parallel_group<thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<unsigned long=1>, unsigned long=0>, unsigned long=0>, thrust::system::cuda::detail::bulk_::detail::closure<thrust::system::cuda::detail::for_each_n_detail::for_each_kernel, thrust::tuple<thrust::system::cuda::detail::bulk_::detail::cursor<unsigned int=0>, thrust::device_ptr<int>, thrust::detail::wrapped_function<thrust::detail::device_generate_functor<thrust::detail::fill_functor<int>>, void>, unsigned int, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type>>>>(unsigned long=1)
+==15230==     API calls:
+Time(%)      Time     Calls       Avg       Min       Max  Name
+100.00%  65.234us         3  21.744us  19.067us  23.258us  cudaLaunch

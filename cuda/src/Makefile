@@ -18,8 +18,8 @@ CXXFLAGS = -O3
 # the exchange_externals function.
 
 #CPPFLAGS = -I. -I../utils -I../fem $(MINIFE_TYPES) $(MINIFE_MATRIX_TYPE) -DHAVE_MPI -DMPICH_IGNORE_CXX_SEEK  #-DMINIFE_DEBUG
-CPPFLAGS = -I. -I../utils -I../fem $(MINIFE_TYPES) $(MINIFE_MATRIX_TYPE) -DHAVE_MPI -DMPICH_IGNORE_CXX_SEEK -DMATVEC_OVERLAP #-DGPUDIRECT #-DMINIFE_DEBUG
-#CPPFLAGS = -I. -I../utils -I../fem $(MINIFE_TYPES) $(MINIFE_MATRIX_TYPE) #-DHAVE_MPI -DMPICH_IGNORE_CXX_SEEK -DMATVEC_OVERLAP #-DGPUDIRECT #-DMATVEC_OVERLAP #-DMINIFE_DEBUG
+#CPPFLAGS = -I. -I../utils -I../fem $(MINIFE_TYPES) $(MINIFE_MATRIX_TYPE) -DHAVE_MPI -DMPICH_IGNORE_CXX_SEEK -DMATVEC_OVERLAP #-DGPUDIRECT #-DMINIFE_DEBUG
+CPPFLAGS = -I. -I../utils -I../fem $(MINIFE_TYPES) $(MINIFE_MATRIX_TYPE) #-DHAVE_MPI -DMPICH_IGNORE_CXX_SEEK -DMATVEC_OVERLAP #-DGPUDIRECT #-DMATVEC_OVERLAP #-DMINIFE_DEBUG
 #CPPFLAGS = -I. -I../utils -I../fem $(MINIFE_TYPES) $(MINIFE_MATRIX_TYPE) -DHAVE_MPI -DMPICH_IGNORE_CXX_SEEK -DGPUDIRECT -DMATVEC_OVERLAP #-DMINIFE_DEBUG
 
 LDFLAGS= 
@@ -37,7 +37,7 @@ LIBS= -l nvToolsExt
 MPICFLAGS=-I$(MPI_HOME)/include -pthread 
 MPILDFLAGS=-L$(MPI_HOME)/lib -lmpi -lmpi_cxx -ldl -lm -lrt -lnsl -lutil -lm -ldl
 
-NVCCFLAGS=-lineinfo -gencode=arch=compute_35,code=\"sm_35,compute_35\" #-gencode=arch=compute_20,code=\"sm_20,compute_20\" 
+NVCCFLAGS=-lineinfo -gencode=arch=compute_61,code=\"sm_61,compute_61\" #-gencode=arch=compute_20,code=\"sm_20,compute_20\" 
 
 NVCC=nvcc -Xcompiler -fopenmp 
 CXX=mpicxx
